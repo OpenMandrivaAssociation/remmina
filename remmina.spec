@@ -23,6 +23,7 @@ BuildRequires:	libavahi-ui-devel
 BuildRequires:	libvte-devel
 BuildRequires:	libgcrypt-devel
 BuildRequires:	unique-devel
+BuildRequires:	intltool >= 0.35.0
 
 %description
 Remmina is a remote desktop client written in GTK+, aiming to be
