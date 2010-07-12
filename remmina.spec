@@ -37,6 +37,8 @@ supported.
 %setup -q
 
 %build
+aclocal
+autoconf
 %configure
 %make
 
