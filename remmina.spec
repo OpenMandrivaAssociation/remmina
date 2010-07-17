@@ -31,7 +31,7 @@ supported.
 
 %package devel
 Summary:	Developmnet files for %{name}
-Group:		Developmnet/C++
+Group:		Development/C++
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
