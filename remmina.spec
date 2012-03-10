@@ -1,7 +1,7 @@
 Summary:	GTK+ remote desktop client
 Name:		remmina
 Version:	0.9.3
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2
 Group:		Networking/Remote access
 Url:		http://remmina.sourceforge.net/
