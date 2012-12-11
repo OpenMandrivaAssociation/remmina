@@ -1,0 +1,78 @@
+Index: FreeRDP-Remmina-356c033/remmina/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina/CMakeLists.txt
+@@ -91,7 +91,7 @@ set(REMMINA_SRCS
+ add_executable(remmina ${REMMINA_SRCS})
+ 
+ include_directories(${GTK_INCLUDE_DIRS})
+-target_link_libraries(remmina ${GTK_LIBRARIES})
++target_link_libraries(remmina ${GTK_LIBRARIES} X11 gmodule-2.0 gdk_pixbuf-2.0 gio-2.0 gobject-2.0 pthread gthread-2.0)
+ 
+ find_suggested_package(LIBSSH)
+ if(LIBSSH_FOUND)
+Index: FreeRDP-Remmina-356c033/remmina-plugins/nx/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina-plugins/nx/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina-plugins/nx/CMakeLists.txt
+@@ -30,7 +30,7 @@ add_library(remmina-plugin-nx ${REMMINA_
+ set_target_properties(remmina-plugin-nx PROPERTIES PREFIX "")
+ 
+ include_directories(${REMMINA_COMMON_INCLUDE_DIRS} ${XKBFILE_INCLUDE_DIRS} ${LIBSSH_INCLUDE_DIRS})
+-target_link_libraries(remmina-plugin-nx ${REMMINA_COMMON_LIBRARIES} ${XKBFILE_LIBRARIES} ${LIBSSH_LIBRARIES})
++target_link_libraries(remmina-plugin-nx ${REMMINA_COMMON_LIBRARIES} ${XKBFILE_LIBRARIES} ${LIBSSH_LIBRARIES} pthread gobject-2.0 X11)
+ 
+ install(TARGETS remmina-plugin-nx DESTINATION ${REMMINA_PLUGINDIR})
+ 
+Index: FreeRDP-Remmina-356c033/remmina-plugins/xdmcp/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina-plugins/xdmcp/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina-plugins/xdmcp/CMakeLists.txt
+@@ -25,7 +25,7 @@ add_library(remmina-plugin-xdmcp ${REMMI
+ set_target_properties(remmina-plugin-xdmcp PROPERTIES PREFIX "")
+ 
+ include_directories(${REMMINA_COMMON_INCLUDE_DIRS})
+-target_link_libraries(remmina-plugin-xdmcp ${REMMINA_COMMON_LIBRARIES})
++target_link_libraries(remmina-plugin-xdmcp ${REMMINA_COMMON_LIBRARIES} pthread gobject-2.0)
+ 
+ install(TARGETS remmina-plugin-xdmcp DESTINATION ${REMMINA_PLUGINDIR})
+ 
+Index: FreeRDP-Remmina-356c033/remmina-plugins/rdp/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina-plugins/rdp/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina-plugins/rdp/CMakeLists.txt
+@@ -39,7 +39,7 @@ add_library(remmina-plugin-rdp ${REMMINA
+ set_target_properties(remmina-plugin-rdp PROPERTIES PREFIX "")
+ 
+ include_directories(${REMMINA_COMMON_INCLUDE_DIRS} ${FREERDP_INCLUDE_DIRS})
+-target_link_libraries(remmina-plugin-rdp ${REMMINA_COMMON_LIBRARIES} ${FREERDP_LIBRARIES})
++target_link_libraries(remmina-plugin-rdp ${REMMINA_COMMON_LIBRARIES} ${FREERDP_LIBRARIES} X11 pthread gobject-2.0 freerdp-utils freerdp-cache)
+ 
+ install(TARGETS remmina-plugin-rdp DESTINATION ${REMMINA_PLUGINDIR})
+ 
+Index: FreeRDP-Remmina-356c033/remmina-plugins-gnome/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina-plugins-gnome/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina-plugins-gnome/CMakeLists.txt
+@@ -30,7 +30,7 @@ target_link_libraries(remmina-plugins-gn
+ find_required_package(GNOMEKEYRING)
+ if(GNOMEKEYRING_FOUND)
+ 	include_directories(${GNOMEKEYRING_INCLUDE_DIRS})
+-	target_link_libraries(remmina-plugins-gnome ${GNOMEKEYRING_LIBRARIES})
++	target_link_libraries(remmina-plugins-gnome ${GNOMEKEYRING_LIBRARIES} glib-2.0)
+ endif()
+ 
+ install(TARGETS remmina-plugins-gnome DESTINATION ${REMMINA_PLUGINDIR})
+Index: FreeRDP-Remmina-356c033/remmina-plugins/vnc/CMakeLists.txt
+===================================================================
+--- FreeRDP-Remmina-356c033.orig/remmina-plugins/vnc/CMakeLists.txt
++++ FreeRDP-Remmina-356c033/remmina-plugins/vnc/CMakeLists.txt
+@@ -28,7 +28,7 @@ add_library(remmina-plugin-vnc ${REMMINA
+ set_target_properties(remmina-plugin-vnc PROPERTIES PREFIX "")
+ 
+ include_directories(${REMMINA_COMMON_INCLUDE_DIRS} ${LIBVNCSERVER_INCLUDE_DIRS})
+-target_link_libraries(remmina-plugin-vnc ${REMMINA_COMMON_LIBRARIES} ${LIBVNCSERVER_LIBRARIES})
++target_link_libraries(remmina-plugin-vnc ${REMMINA_COMMON_LIBRARIES} ${LIBVNCSERVER_LIBRARIES} gnutls gcrypt gobject-2.0 pthread gdk_pixbuf-2.0)
+ 
+ install(TARGETS remmina-plugin-vnc DESTINATION ${REMMINA_PLUGINDIR})
+ 
