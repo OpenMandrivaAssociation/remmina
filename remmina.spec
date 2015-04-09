@@ -72,15 +72,15 @@ BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(xkbfile)
 BuildRequires:	pkgconfig(freerdp) >= 1.0
 BuildRequires:	pkgconfig(gnome-keyring-1)
-BuildRequires:	zlib-devel
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	jpeg-devel
-BuildRequires:	gnutls-devel
+BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libvncserver)
-BuildRequires:	libavahi-ui-devel
+BuildRequires:	pkgconfig(avahi-ui)
 BuildRequires:	pkgconfig(vte-2.91)
-BuildRequires:	libgcrypt-devel
-BuildRequires:	unique-devel
+BuildRequires:	pkgconfig(libgcrypt)
+BuildRequires:	pkgconfig(unique-3.0)
 BuildRequires:	intltool >= 0.35.0
 
 %description
