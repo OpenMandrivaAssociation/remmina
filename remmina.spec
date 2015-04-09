@@ -92,7 +92,7 @@ supported.
 
 %package plugins
 Summary:	A set of plugins for remmina
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{EVRD}
 
 %description plugins
 A set of plugins for remote desktop client - remmina.
@@ -100,7 +100,7 @@ A set of plugins for remote desktop client - remmina.
 %package devel
 Summary:	Developmnet files for %{name}
 Group:		Development/C++
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{EVRD}
 
 %description devel
 Development files and headers for %{name}.
@@ -149,7 +149,7 @@ Development files and headers for %{name}.
 rm -f %{buildroot}%{_iconsdir}/hicolor/icon-theme.cache
 
 # FIXME: includedir is empty
-rm -rf %{buildroot}/%{_includedir}
+rm -rf %{buildroot}%{_includedir}
 
 %find_lang %{name}
 %find_lang %{name}-plugins
