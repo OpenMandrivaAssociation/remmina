@@ -78,7 +78,7 @@ BuildRequires:	gnutls-devel
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libvncserver)
 BuildRequires:	libavahi-ui-devel
-BuildRequires:	pkgconfig(vte)
+BuildRequires:	pkgconfig(vte-2.91)
 BuildRequires:	libgcrypt-devel
 BuildRequires:	unique-devel
 BuildRequires:	intltool >= 0.35.0
@@ -145,11 +145,9 @@ Development files and headers for %{name}.
 %make
 
 %install
-pushd build
-%makeinstall_std
-popd
+%makeinstall_std -C build
 
-%__rm -f %{buildroot}%{_iconsdir}/hicolor/icon-theme.cache
+rm -f %{buildroot}%{_iconsdir}/hicolor/icon-theme.cache
 
 # FIXME: includedir is empty
 rm -rf %{buildroot}/%{_includedir}
@@ -161,7 +159,6 @@ rm -rf %{buildroot}/%{_includedir}
 %doc remmina/AUTHORS remmina/ChangeLog remmina/NEWS remmina/README*
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-#%{_datadir}/%{name}/*
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_iconsdir}/hicolor/*/actions/%{name}*
 
@@ -172,5 +169,5 @@ rm -rf %{buildroot}/%{_includedir}
 
 %files devel
 %{_libdir}/pkgconfig/*.pc
-#%{_includedir}/%{name}/*.h
+
 
