@@ -65,7 +65,7 @@ Requires:	rdesktop
 BuildRequires:	cmake
 BuildRequires:	rdesktop
 BuildRequires:	pkgconfig(gdk-3.0)
-BuildRequires:	pkgconfig(appindicator3-0.1)
+BuildRequires:	pkgconfig(appindicator3-0.1) >= 12.10.0
 BuildRequires:	pkgconfig(avahi-ui-gtk3)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(xkbfile)
