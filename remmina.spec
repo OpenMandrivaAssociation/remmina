@@ -12,7 +12,7 @@ Patch0:		remmina-1.0-rosa-linkage.patch
 Patch1:		remmina-1.0-rosa-datadir.patch
 Patch2:		remmina-1.0-rosa-desktop.patch
 Patch3:		remmina-1.0-rosa-libdir.patch
-
+Patch4:         remmina-vte-2.91-support.patch
 # Fix some linking errors
 # https://github.com/FreeRDP/Remmina/commit/503a008e
 Patch100:         remmina-1.0.0-fix-library-name.patch
@@ -111,6 +111,7 @@ Development files and headers for %{name}.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %patch100 -p1 -b .fix-library-name
 
