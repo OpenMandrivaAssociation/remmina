@@ -1,4 +1,6 @@
 %define oname Remmina
+%define debug_package	%{nil}
+%define _build_pkgcheck_set %{nil}
 
 Summary:	GTK+ remote desktop client
 Name:		remmina
