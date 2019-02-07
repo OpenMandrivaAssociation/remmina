@@ -1,3 +1,4 @@
----
-sources:
+removed_sources:
   Remmina-1.0.0.tar.gz: eeaefe53e9770849ed0e11ebae92f54ebffec2de
+sources:
+  Remmina-1.3.2.tar.gz: 3d8df03c50f0ba5e265fe2b6f38310152732b58e

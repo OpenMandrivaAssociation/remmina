@@ -1,175 +1,300 @@
-%define oname Remmina
-%define debug_package	%{nil}
-%define _build_pkgcheck_set %{nil}
+%define tarballver	%{version}
+%define tarballdir	v%{version}
 
-Summary:	GTK+ remote desktop client
 Name:		remmina
-Version:	1.0.0
-Release:	3
-License:	GPLv2+
+Version:	1.3.2
+Release:	1
+Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
-Url:		http://remmina.sourceforge.net/
-Source0:	https://github.com/downloads/FreeRDP/Remmina/%{oname}-%{version}.tar.gz
-Patch0:		remmina-1.0-rosa-linkage.patch
-Patch1:		remmina-1.0-rosa-datadir.patch
-Patch2:		remmina-1.0-rosa-desktop.patch
-Patch3:		remmina-1.0-rosa-libdir.patch
-Patch4:         remmina-vte-2.91-support.patch
-# Fix some linking errors
-# https://github.com/FreeRDP/Remmina/commit/503a008e
-Patch100:         remmina-1.0.0-fix-library-name.patch
+License:	GPLv2+
+URL:		http://www.remmina.org/wp/
+Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
 
-# The following 4 patches are needed to add clipboard support (#818155)
-# https://github.com/FreeRDP/Remmina/commit/3ebdd6e7
-Patch102:         remmina-1.0.0-add-clipboard-support.patch
-# https://github.com/FreeRDP/Remmina/commit/97c2af8c
-Patch103:         remmina-1.0.0-clipboard-bugfix.patch
-# https://github.com/FreeRDP/Remmina/commit/84327f81
-Patch104:         remmina-1.0.0-some-more-clipboard-fixes.patch
-# https://github.com/FreeRDP/Remmina/commit/c1ef3a16
-Patch105:         remmina-1.0.0-disconnect-signal-handler-after-disconnect.patch
-
-# https://github.com/FreeRDP/Remmina/commit/6ee20289
-Patch110:        remmina-1.0.0-fix-crashes-in-some-cases.patch
-# https://github.com/FreeRDP/Remmina/commit/b2277827
-Patch111:        remmina-1.0.0-fix-memory-leak.patch
-
-# Fedora bug:   https://bugzilla.redhat.com/show_bug.cgi?id=953678
-# upstream bug: https://github.com/FreeRDP/Remmina/issues/63
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/1901a1e9
-Patch112:        remmina-1.0.0-fix-typo-when-fitting-window.patch
-
-# Fedora bug:   https://bugzilla.redhat.com/show_bug.cgi?id=834883
-# upstream bug: https://github.com/FreeRDP/Remmina/issues/76
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/1901a1e9
-Patch113:        remmina-1.0.0-trayicon.patch
-
-# Fedora bug:   https://bugzilla.redhat.com/show_bug.cgi?id=830210
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/
-Patch114:        remmina-1.0.0-fix-scrolling-in-vnc-plugin.patch
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/fe1b698e
-Patch115:        remmina-1.0.0-Also-handle-GDK_SCROLL_SMOOTH.patch
-
-# upstream bug: https://github.com/FreeRDP/Remmina/issues/77
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/bed49ad6
-Patch116:        remmina-1.0.0-close-SSH-tunnel-on-disconnect.patch
-
-# Fedora bug:   https://bugzilla.redhat.com/show_bug.cgi?id=864262
-# upstream fix: https://github.com/FreeRDP/Remmina/commit/348e01d2
-Patch117:        remmina-1.0.0-fix-fullscreen-with-multiple-monitors.patch
-
-# From Debian. Thanks to Luca Falavigna <dktrkranz at debian dot org>
-Patch135:        remmina-1.0.0-remove-inline-libvncserver.patch
-
-Requires:	rdesktop
-# We don't have x11-server-xephyr so try to live without it
-#Requires:	x11-server-xephyr
 BuildRequires:	cmake
-BuildRequires:	rdesktop
-BuildRequires:	pkgconfig(gdk-3.0)
-BuildRequires:	pkgconfig(appindicator3-0.1) >= 12.10.0
-BuildRequires:	pkgconfig(avahi-ui-gtk3)
-BuildRequires:	pkgconfig(avahi-client)
-BuildRequires:	pkgconfig(xkbfile)
-BuildRequires:	pkgconfig(freerdp) >= 1.0
-BuildRequires:	pkgconfig(gnome-keyring-1)
-BuildRequires:	pkgconfig(zlib)
-BuildRequires:	jpeg-devel
+BuildRequires:	gettext
+BuildRequires:	intltool
+BuildRequires:	libgcrypt-devel
+BuildRequires:	pkgconfig(json-glib-1.0)
+BuildRequires:	pkgconfig(libsoup-2.4)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libssh)
+BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
+BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
+BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
+BuildRequires:	pkgconfig(spice-client-gtk-3.0)
 BuildRequires:	pkgconfig(libvncserver)
-BuildRequires:	pkgconfig(avahi-ui)
+BuildRequires:	pkgconfig(xkbfile)
 BuildRequires:	pkgconfig(vte-2.91)
-BuildRequires:	pkgconfig(libgcrypt)
-BuildRequires:	pkgconfig(unique-3.0)
-BuildRequires:	intltool >= 0.35.0
+BuildRequires:	pkgconfig(zlib)
 
 %description
-Remmina is a remote desktop client written in GTK+, aiming to be
-useful for system administrators and travellers, who need to work with
-lots of remote computers in front of either large monitors or tiny
-netbooks. Remmina supports multiple network protocols in an integrated
-and consistant user interface. Currently RDP, VNC, XDMCP and SSH are
-supported.
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
 
-%package plugins
-Summary:	A set of plugins for remmina
-Requires:	%{name} = %{EVRD}
+Remmina supports multiple network protocols in an integrated and consistent
+user interface. Currently RDP, VNC, XDMCP and SSH are supported.
 
-%description plugins
-A set of plugins for remote desktop client - remmina.
+Please don't forget to install the plugins for the protocols you want to use.
 
-%package devel
-Summary:	Developmnet files for %{name}
-Group:		Development/C++
-Requires:	%{name} = %{EVRD}
+#----------------------------------------------------------------------------
 
-%description devel
-Development files and headers for %{name}.
+%package	devel
+Summary:	Development files for %{name}
+Group:		Development/GNOME and GTK+
+Requires:	%{name} = %{version}-%{release}
+
+%description	devel
+The %{name}-devel package contains header files for developing plugins for
+%{name}.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-common
+Summary:	Common files for Remmina Remote Desktop Client plugins
+Group:		Networking/Remote access
+Requires:	%{name} = %{version}-%{release}
+
+%description	plugins-common
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains files shared among all plugins for the Remmina remote
+desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-exec
+Summary:	External execution plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+%description    plugins-exec
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the plugin to execute external processes (commands or
+applications) from the Remmina window.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-secret
+Summary:	Keyring integration for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+BuildRequires:	pkgconfig(libsecret-1)
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+Obsoletes:	remmina-plugins-gnome < 1.2.0-0.rcgit.24.2
+Provides:	remmina-plugins-gnome = %{version}-%{release}
+
+%description	plugins-secret
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the plugin with keyring support for the Remmina remote
+desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-nx
+Summary:	NX plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+Requires:	nxproxy
+
+%description	plugins-nx
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the NX plugin for the Remmina remote desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-rdp
+Summary:	RDP plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+BuildRequires:	pkgconfig(freerdp2) >= 2.0
+Requires:	%{name}-plugins-common = %{version}-%{release}
+Requires:	freerdp >= 2.0
+
+%description	plugins-rdp
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the Remote Desktop Protocol (RDP) plugin for the Remmina
+remote desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-spice
+Summary:	SPICE plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+%description	plugins-spice
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the SPICE plugin for the Remmina remote desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-st
+Summary:	Socket Terminal plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+%description	plugins-st
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the Socket Terminal plugin for the Remmina remote
+desktop client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-telepathy
+Summary:	Telepathy plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+BuildRequires:	pkgconfig(telepathy-glib)
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+%description	plugins-telepathy
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the Telepathy plugin for the Remmina remote desktop
+client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-vnc
+Summary:	VNC plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libvncserver)
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+%description	plugins-vnc
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the VNC plugin for the Remmina remote desktop
+client.
+
+#----------------------------------------------------------------------------
+
+%package	plugins-xdmcp
+Summary:	XDMCP plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+Requires:	x11-server-xephyr
+
+%description	plugins-xdmcp
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the XDMCP plugin for the Remmina remote desktop
+client.
+
+#----------------------------------------------------------------------------
 
 %prep
-%setup -q -n FreeRDP-Remmina-356c033
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-
-%patch100 -p1 -b .fix-library-name
-
-%patch102 -p1 -b .add-clipboard-support
-%patch103 -p1 -b .clipboard-bugfix
-%patch104 -p1 -b .some-more-clipboard-fixes
-%patch105 -p1 -b .disconnect-signal-handler
-
-%patch110 -p1 -b .fix-crashes-in-some-cases
-%patch111 -p1 -b .fix-memory-leak
-
-%patch112 -p1 -b .fitting-window
-
-%patch113 -p1 -b .trayicon
-
-%patch114 -p1 -b .vnc-scrolling
-
-%patch115 -p1 -b .GDK_SCROLL_SMOOTH
-
-%patch116 -p1 -b .ssh-disconnect
-
-%patch117 -p1 -b .multiple-monitors
-
-%patch135 -p1 -b .libvncserver
-
-
+%setup -qn Remmina-%{tarballver}
+%apply_patches
 
 %build
-# FIXME: telepathy plugin is broken
-%cmake -DWITH_TELEPATHY:BOOL=OFF
-%make
+%cmake -DWITH_APPINDICATOR=OFF
+
+%make_build
 
 %install
-%makeinstall_std -C build
-
-rm -f %{buildroot}%{_iconsdir}/hicolor/icon-theme.cache
-
-# FIXME: includedir is empty
-rm -rf %{buildroot}%{_includedir}
+%make_install -C build
 
 %find_lang %{name}
-%find_lang %{name}-plugins
+
+desktop-file-install \
+	--remove-category="X-GNOME-NetworkSettings" \
+	--dir %{buildroot}%{_datadir}/applications \
+%{buildroot}%{_datadir}/applications/org.%{name}.Remmina.desktop
 
 %files -f %{name}.lang
-%doc remmina/AUTHORS remmina/ChangeLog remmina/NEWS remmina/README*
+%doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
 %{_bindir}/%{name}
-%{_datadir}/applications/%{name}.desktop
-%{_iconsdir}/hicolor/*/apps/%{name}.*
-%{_iconsdir}/hicolor/*/actions/%{name}*
-
-%files plugins -f %{name}-plugins.lang
-%doc remmina-plugins/AUTHORS remmina-plugins/ChangeLog remmina-plugins/NEWS remmina-plugins/README*
-%{_libdir}/remmina/plugins
-%{_iconsdir}/hicolor/*/emblems/%{name}*
+%{_bindir}/%{name}-gnome
+%{_bindir}/gnome-session-%{name}
+%{_datadir}/%{name}/
+%{_datadir}/gnome-session/sessions/%{name}-gnome.session
+%{_datadir}/xsessions/%{name}-gnome.desktop
+%{_datadir}/applications/org.%{name}.Remmina.desktop
+%{_datadir}/applications/%{name}-file.desktop
+%{_datadir}/applications/%{name}-gnome.desktop
+%{_datadir}/metainfo/org.%{name}.Remmina.appdata.xml
+%{_datadir}/mime/packages/%{name}-mime.xml
+%{_iconsdir}/hicolor/*/apps/*%{name}*.svg
+%{_iconsdir}/hicolor/*/apps/*%{name}*.png
+%{_iconsdir}/hicolor/*/actions/%{name}*.svg
+%{_iconsdir}/hicolor/*/emblems/%{name}-sftp-*.svg
+%{_iconsdir}/hicolor/*/emblems/%{name}-ssh-*.svg
+%{_iconsdir}/hicolor/*/emblems/%{name}-tool-*.svg
+%{_iconsdir}/hicolor/*/actions/view-list.svg
+%{_mandir}/man1/%{name}.1.*
+%{_mandir}/man1/%{name}-gnome.1.*
+%{_mandir}/man1/gnome-session-%{name}.1.*
 
 %files devel
-%{_libdir}/pkgconfig/*.pc
+%{_includedir}/%{name}/
+%{_libdir}/pkgconfig/%{name}.pc
 
+%files plugins-common
+%dir %{_libdir}/%{name}/
+%dir %{_libdir}/%{name}/plugins/
+
+%files plugins-exec
+%{_libdir}/%{name}/plugins/%{name}-plugin-exec.so
+
+%files plugins-secret
+%{_libdir}/%{name}/plugins/%{name}-plugin-secret.so
+
+%files plugins-nx
+%{_libdir}/%{name}/plugins/%{name}-plugin-nx.so
+%{_iconsdir}/hicolor/*/emblems/%{name}-nx-*.svg
+
+%files plugins-rdp
+%{_libdir}/%{name}/plugins/%{name}-plugin-rdp.so
+%{_iconsdir}/hicolor/*/emblems/%{name}-rdp-*.svg
+
+%files plugins-spice
+%{_libdir}/%{name}/plugins/%{name}-plugin-spice.so
+%{_iconsdir}/hicolor/*/emblems/%{name}-spice-*.svg
+
+%files plugins-st
+%{_libdir}/%{name}/plugins/%{name}-plugin-st.so
+
+%files plugins-telepathy
+%{_libdir}/%{name}/plugins/%{name}-plugin-telepathy.so
+%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Remmina.service
+%{_datadir}/telepathy/clients/Remmina.client
+
+%files plugins-vnc
+%{_libdir}/%{name}/plugins/%{name}-plugin-vnc.so
+%{_iconsdir}/hicolor/*/emblems/%{name}-vnc-*.svg
+
+%files plugins-xdmcp
+%{_libdir}/%{name}/plugins/%{name}-plugin-xdmcp.so
+%{_iconsdir}/hicolor/*/emblems/%{name}-xdmcp-*.svg
 
