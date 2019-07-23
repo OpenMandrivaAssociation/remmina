@@ -2,7 +2,7 @@
 %define tarballdir	v%{version}
 
 Name:		remmina
-Version:	1.3.2
+Version:	1.3.4
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
