@@ -17,6 +17,7 @@ BuildRequires:	libgcrypt-devel
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libjpeg)
