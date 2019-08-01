@@ -21,6 +21,7 @@ BuildRequires:	pkgconfig(webkit2gtk-4.0)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libssh)
+BuildRequires:	pkgconfig(libsodium)
 BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
