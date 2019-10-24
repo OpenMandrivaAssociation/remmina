@@ -28,6 +28,7 @@ BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
 BuildRequires:	pkgconfig(spice-client-gtk-3.0)
 BuildRequires:	pkgconfig(libvncserver)
+BuildRequires:	pkgconfig(TelepathyQt5)
 BuildRequires:	pkgconfig(xkbfile)
 BuildRequires:	pkgconfig(vte-2.91)
 BuildRequires:	pkgconfig(zlib)
@@ -215,6 +216,23 @@ client.
 
 #----------------------------------------------------------------------------
 
+%package	plugins-www
+Summary:	www plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+Requires:	x11-server-xephyr
+
+%description	plugins-www
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the www plugin for the Remmina remote desktop
+client.
+
+
+#----------------------------------------------------------------------------
+
 %prep
 %setup -qn Remmina-%{tarballver}
 %apply_patches
@@ -236,6 +254,7 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
+%{_bindir}/remmina-file-wrapper.sh
 %{_bindir}/%{name}
 %{_bindir}/%{name}-gnome
 %{_bindir}/gnome-session-%{name}
@@ -299,4 +318,8 @@ desktop-file-install \
 %files plugins-xdmcp
 %{_libdir}/%{name}/plugins/%{name}-plugin-xdmcp.so
 %{_iconsdir}/hicolor/*/emblems/%{name}-xdmcp-*.svg
+
+%files plugins-www
+%{_libdir}/remmina/plugins/remmina-plugin-www.so
+%{_iconsdir}/hicolor/scalable/emblems/remmina-www-symbolic.svg
 
