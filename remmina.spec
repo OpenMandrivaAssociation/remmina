@@ -288,8 +288,8 @@ desktop-file-install \
 %{_libdir}/%{name}/plugins/%{name}-plugin-st.so
 
 %files plugins-telepathy
-%{_libdir}/%{name}/plugins/%{name}-plugin-telepathy.so
-%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Remmina.service
+#{_libdir}/%{name}/plugins/%{name}-plugin-telepathy.so
+#{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Remmina.service
 %{_datadir}/telepathy/clients/Remmina.client
 
 %files plugins-vnc
