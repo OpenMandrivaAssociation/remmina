@@ -166,22 +166,6 @@ desktop client.
 
 #----------------------------------------------------------------------------
 
-%package	plugins-telepathy
-Summary:	Telepathy plugin for Remmina Remote Desktop Client
-Group:		Networking/Remote access
-BuildRequires:	pkgconfig(telepathy-glib)
-Requires:	%{name}-plugins-common = %{version}-%{release}
-
-%description	plugins-telepathy
-Remmina is a remote desktop client written in GTK+, aiming to be useful for
-system administrators and travelers, who need to work with lots of remote
-computers in front of either large monitors or tiny netbooks.
-
-This package contains the Telepathy plugin for the Remmina remote desktop
-client.
-
-#----------------------------------------------------------------------------
-
 %package	plugins-vnc
 Summary:	VNC plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
@@ -221,6 +205,7 @@ Summary:	www plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	x11-server-xephyr
+Obsoletes:	remmina-plugins-telepathy 
 
 %description	plugins-www
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -305,11 +290,6 @@ desktop-file-install \
 
 %files plugins-st
 %{_libdir}/%{name}/plugins/%{name}-plugin-st.so
-
-%files plugins-telepathy
-#{_libdir}/%{name}/plugins/%{name}-plugin-telepathy.so
-#{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Remmina.service
-#{_datadir}/telepathy/clients/Remmina.client
 
 %files plugins-vnc
 %{_libdir}/%{name}/plugins/%{name}-plugin-vnc.so
