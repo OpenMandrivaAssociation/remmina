@@ -15,6 +15,7 @@ BuildRequires:	cmake
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	libgcrypt-devel
+BuildRequires:  cups-devel
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(gtk+-3.0)
