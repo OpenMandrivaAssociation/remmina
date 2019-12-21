@@ -2,18 +2,20 @@
 %define tarballdir	v%{version}
 
 Name:		remmina
-Version:	1.3.6
+Version:	1.3.8
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
 URL:		http://www.remmina.org/wp/
-Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
+Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
+#Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
 
 BuildRequires:	cmake
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	libgcrypt-devel
+BuildRequires:  cups-devel
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(gtk+-3.0)
@@ -219,8 +221,8 @@ client.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn Remmina-%{tarballver}
-%apply_patches
+%setup -qn Remmina-%{tarballdir}
+%autopatch -p1
 
 %build
 %cmake -DWITH_APPINDICATOR=OFF
@@ -239,7 +241,7 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
-%{_bindir}/remmina-file-wrapper.sh
+#{_bindir}/remmina-file-wrapper
 %{_bindir}/%{name}
 %{_bindir}/%{name}-gnome
 %{_bindir}/gnome-session-%{name}
@@ -258,9 +260,14 @@ desktop-file-install \
 %{_iconsdir}/hicolor/*/emblems/%{name}-ssh-*.svg
 %{_iconsdir}/hicolor/*/emblems/%{name}-tool-*.svg
 %{_iconsdir}/hicolor/*/actions/view-list.svg
+%{_iconsdir}/hicolor/apps/org.remmina.Remmina-symbolic.svg
+%{_iconsdir}/hicolor/apps/remmina-symbolic.svg
+%{_iconsdir}/hicolor/scalable/panel/remmina-panel-inverted.svg
+%{_iconsdir}/hicolor/scalable/panel/remmina-panel.svg
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/%{name}-gnome.1.*
 %{_mandir}/man1/gnome-session-%{name}.1.*
+%{_mandir}/man1/remmina-file-wrapper.1.xz
 
 %files devel
 %{_includedir}/%{name}/
