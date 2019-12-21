@@ -241,7 +241,7 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
-#{_bindir}/remmina-file-wrapper.sh
+#{_bindir}/remmina-file-wrapper
 %{_bindir}/%{name}
 %{_bindir}/%{name}-gnome
 %{_bindir}/gnome-session-%{name}
@@ -260,9 +260,14 @@ desktop-file-install \
 %{_iconsdir}/hicolor/*/emblems/%{name}-ssh-*.svg
 %{_iconsdir}/hicolor/*/emblems/%{name}-tool-*.svg
 %{_iconsdir}/hicolor/*/actions/view-list.svg
+%{_iconsdir}/hicolor/apps/org.remmina.Remmina-symbolic.svg
+%{_iconsdir}/hicolor/apps/remmina-symbolic.svg
+%{_iconsdir}/hicolor/scalable/panel/remmina-panel-inverted.svg
+%{_iconsdir}/hicolor/scalable/panel/remmina-panel.svg
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/%{name}-gnome.1.*
 %{_mandir}/man1/gnome-session-%{name}.1.*
+%{_mandir}/man1/remmina-file-wrapper.1.xz
 
 %files devel
 %{_includedir}/%{name}/
