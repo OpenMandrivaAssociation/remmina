@@ -241,7 +241,7 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
-#{_bindir}/remmina-file-wrapper
+%{_bindir}/remmina-file-wrapper
 %{_bindir}/%{name}
 %{_bindir}/%{name}-gnome
 %{_bindir}/gnome-session-%{name}
