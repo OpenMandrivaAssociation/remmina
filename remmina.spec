@@ -2,13 +2,14 @@
 %define tarballdir	v%{version}
 
 Name:		remmina
-Version:	1.3.6
+Version:	1.3.8
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
 URL:		http://www.remmina.org/wp/
-Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
+Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
+#Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
 
 BuildRequires:	cmake
 BuildRequires:	gettext
@@ -219,8 +220,8 @@ client.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn Remmina-%{tarballver}
-%apply_patches
+%setup -qn Remmina-%{tarballdir}
+%autopatch -p1
 
 %build
 %cmake -DWITH_APPINDICATOR=OFF
