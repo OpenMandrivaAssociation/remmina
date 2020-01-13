@@ -267,7 +267,7 @@ desktop-file-install \
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/%{name}-gnome.1.*
 %{_mandir}/man1/gnome-session-%{name}.1.*
-%{_mandir}/man1/remmina-file-wrapper.1.xz
+%{_mandir}/man1/remmina-file-wrapper.1.*
 
 %files devel
 %{_includedir}/%{name}/
