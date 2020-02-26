@@ -2,7 +2,7 @@
 %define tarballdir	v%{version}
 
 Name:		remmina
-Version:	1.3.10
+Version:	1.4.1
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libsodium)
 BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
-BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
+#BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
 BuildRequires:	pkgconfig(spice-client-gtk-3.0)
 BuildRequires:	pkgconfig(libvncserver)
