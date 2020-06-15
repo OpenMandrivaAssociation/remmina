@@ -243,14 +243,14 @@ desktop-file-install \
 %doc AUTHORS CHANGELOG.md README.md THANKS.md COPYING LICENSE
 %{_bindir}/remmina-file-wrapper
 %{_bindir}/%{name}
-%{_bindir}/%{name}-gnome
-%{_bindir}/gnome-session-%{name}
+#{_bindir}/%{name}-gnome
+#{_bindir}/gnome-session-%{name}
 %{_datadir}/%{name}/
-%{_datadir}/gnome-session/sessions/%{name}-gnome.session
-%{_datadir}/xsessions/%{name}-gnome.desktop
+#{_datadir}/gnome-session/sessions/%{name}-gnome.session
+#{_datadir}/xsessions/%{name}-gnome.desktop
 %{_datadir}/applications/org.%{name}.Remmina.desktop
 %{_datadir}/applications/%{name}-file.desktop
-%{_datadir}/applications/%{name}-gnome.desktop
+#{_datadir}/applications/%{name}-gnome.desktop
 %{_datadir}/metainfo/org.%{name}.Remmina.appdata.xml
 %{_datadir}/mime/packages/%{name}-mime.xml
 %{_iconsdir}/hicolor/*/apps/*%{name}*.svg
@@ -265,8 +265,8 @@ desktop-file-install \
 %{_iconsdir}/hicolor/scalable/panel/remmina-panel-inverted.svg
 %{_iconsdir}/hicolor/scalable/panel/remmina-panel.svg
 %{_mandir}/man1/%{name}.1.*
-%{_mandir}/man1/%{name}-gnome.1.*
-%{_mandir}/man1/gnome-session-%{name}.1.*
+#{_mandir}/man1/%{name}-gnome.1.*
+#{_mandir}/man1/gnome-session-%{name}.1.*
 %{_mandir}/man1/remmina-file-wrapper.1.*
 
 %files devel
