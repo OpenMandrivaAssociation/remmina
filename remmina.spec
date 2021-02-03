@@ -1,12 +1,12 @@
-%define tarballver	%{version}
-%define tarballdir	v%{version}
+%define tarballver %{version}
+%define tarballdir v%{version}
 
-%bcond_with	appindicator
-%bcond_without	kwallet_plugin
+%bcond_with appindicator
+%bcond_without kwallet_plugin
 
 Name:		remmina
-Version:	1.4.10
-Release:	2
+Version:	1.4.11
+Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
@@ -17,7 +17,7 @@ Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{ta
 BuildRequires:	cmake
 BuildRequires:	gettext
 BuildRequires:	intltool
-BuildRequires:  cups-devel
+BuildRequires:	cups-devel
 #BuildRequires: libappstream-glib
 BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
 #BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
@@ -325,8 +325,7 @@ client.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn Remmina-%{tarballdir}
-%autopatch -p1
+%autosetup -n Remmina-%{tarballdir} -p1
 
 %build
 %cmake \
