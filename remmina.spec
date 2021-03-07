@@ -19,9 +19,7 @@ BuildRequires:	cmake
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	cups-devel
-#BuildRequires: libappstream-glib
 BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
-#BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(gnutls)
@@ -29,9 +27,8 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(libgcrypt)
-#BuildRequires:	pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpcre2-8)
-#BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libsodium)
