@@ -5,7 +5,7 @@
 %bcond_without kwallet_plugin
 
 Name:		remmina
-Version:	1.4.11
+Version:	1.4.12
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -13,14 +13,13 @@ License:	GPLv2+
 URL:		http://www.remmina.org/wp/
 Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
 #Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
+Patch0:		0001-Allow-spice-plugin-compilation-with_--no-undefined.patch
 
 BuildRequires:	cmake
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	cups-devel
-#BuildRequires: libappstream-glib
 BuildRequires:	pkgconfig(avahi-client) >= 0.6.3
-#BuildRequires:	pkgconfig(avahi-ui) >= 0.6.3
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.30
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(gnutls)
@@ -28,9 +27,8 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(libgcrypt)
-#BuildRequires:	pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpcre2-8)
-#BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libsodium)
