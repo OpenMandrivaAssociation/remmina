@@ -1,0 +1,102 @@
+From c550e23cc1319e0b298fd60566452cfcf3af46ed Mon Sep 17 00:00:00 2001
+From: Giovanni Panozzo <giovanni@panozzo.it>
+Date: Sat, 6 Mar 2021 15:45:33 +0100
+Subject: [PATCH 1/3] Allow spice plugin compilation with --no-undefined
+
+---
+ cmake/FindSpice.cmake | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/FindSpice.cmake b/cmake/FindSpice.cmake
+index cb8c13514..9d6417a1a 100644
+--- a/cmake/FindSpice.cmake
++++ b/cmake/FindSpice.cmake
+@@ -43,8 +43,14 @@ find_library(SPICE_CLIENT_GTK3_LIB NAMES spice-client-gtk-3.0
+     ${COMMON_LIB_DIR}
+ )
+ 
+-if(SPICE_CLIENT_GTK3_LIB)
+-    set(SPICE_LIBRARIES ${SPICE_CLIENT_GTK3_LIB})
++find_library(SPICE_CLIENT_GLIB_LIB NAMES spice-client-glib-2.0
++    PATHS
++    ${_SPICE_LIBRARY_DIRS}
++    ${COMMON_LIB_DIR}
++)
++
++if(SPICE_CLIENT_GTK3_LIB AND SPICE_CLIENT_GLIB_LIB)
++    set(SPICE_LIBRARIES ${SPICE_CLIENT_GTK3_LIB} ${SPICE_CLIENT_GLIB_LIB})
+     message(STATUS "Spice-Libs: ${SPICE_LIBRARIES}")
+ endif()
+ 
+-- 
+GitLab
+
+
+From 428c7edd672f1f408608c1751f4f07ec3fcea075 Mon Sep 17 00:00:00 2001
+From: Giovanni Panozzo <giovanni@panozzo.it>
+Date: Sat, 6 Mar 2021 15:56:10 +0100
+Subject: [PATCH 2/3] Allow kwallet plugin compilation with --no-undefined
+
+---
+ plugins/kwallet/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/kwallet/CMakeLists.txt b/plugins/kwallet/CMakeLists.txt
+index 1d7778f4e..d1c1f0ba3 100644
+--- a/plugins/kwallet/CMakeLists.txt
++++ b/plugins/kwallet/CMakeLists.txt
+@@ -48,7 +48,7 @@ if(KF5Wallet_FOUND)
+     set_target_properties(remmina-plugin-kwallet PROPERTIES NO_SONAME 1)
+ 
+     include_directories(${GTK_INCLUDE_DIRS})
+-    target_link_libraries(remmina-plugin-kwallet KF5::Wallet)
++    target_link_libraries(remmina-plugin-kwallet KF5::Wallet ${GLib_LIBRARY})
+ 
+     install(TARGETS remmina-plugin-kwallet DESTINATION ${REMMINA_PLUGINDIR})
+ endif()
+-- 
+GitLab
+
+
+From d269ec49b37dc96e688a87270dcdc7e37f3f00ff Mon Sep 17 00:00:00 2001
+From: Antenore Gatta <antenore@simbiosi.org>
+Date: Sat, 6 Mar 2021 22:59:44 +0100
+Subject: [PATCH 3/3] =?UTF-8?q?Adding=20linker=20option=20-Wl,=E2=80=93no-?=
+ =?UTF-8?q?undefined?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+-Wl,–no-undefined linker option can be used when building shared library, undefined symbols will be shown as linker errors.
+
+This should avoid issues like #2429
+
+Signed-off-by: Antenore Gatta <antenore@simbiosi.org>
+---
+ CMakeLists.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ebe088e54..4492dfc24 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -237,6 +237,17 @@ if(${CMAKE_C_COMPILER_ID} STREQUAL "Clang")
+   endif()
+ endif()
+ 
++# Figure out no-undefined flag
++if(${CMAKE_SYSTEM_NAME} STREQUAL Darwin)
++    set(NO_UNDEFINED_FLAG "-Wl,-undefined,error")
++elseif((${CMAKE_SYSTEM_NAME} STREQUAL Linux) OR MINGW)
++    set(NO_UNDEFINED_FLAG "-Wl,--no-undefined")
++else()
++    # On OpenBSD this seems to cause problems, so we unset it
++    set(NO_UNDEFINED_FLAG "")
++endif()
++set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${NO_UNDEFINED_FLAG}")
++
+ check_include_files(sys/socket.h HAVE_SYS_SOCKET_H)
+ check_include_files(arpa/inet.h HAVE_ARPA_INET_H)
+ check_include_files(netinet/in.h HAVE_NETINET_IN_H)
+-- 
+GitLab
