@@ -13,6 +13,7 @@ License:	GPLv2+
 URL:		http://www.remmina.org/wp/
 Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
 #Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
+Patch0:		0001-Allow-spice-plugin-compilation-with_--no-undefined.patch
 
 BuildRequires:	cmake
 BuildRequires:	gettext
