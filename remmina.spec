@@ -5,7 +5,7 @@
 %bcond_without kwallet_plugin
 
 Name:		remmina
-Version:	1.4.12
+Version:	1.4.15
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
