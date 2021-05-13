@@ -5,7 +5,7 @@
 %bcond_without kwallet_plugin
 
 Name:		remmina
-Version:	1.4.15
+Version:	1.4.16
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -13,7 +13,6 @@ License:	GPLv2+
 URL:		http://www.remmina.org/wp/
 Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
 #Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
-#Patch0:		0001-Allow-spice-plugin-compilation-with_--no-undefined.patch
 
 BuildRequires:	cmake
 BuildRequires:	gettext
