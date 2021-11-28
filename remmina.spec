@@ -1,18 +1,18 @@
-%define tarballver %{version}
-%define tarballdir v%{version}
-
 %bcond_with appindicator
 %bcond_without kwallet_plugin
+%bcond_with nx_plugin
+%bcond_with xdmcp_plugin
+%bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.18
+Version:	1.4.21
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
 URL:		http://www.remmina.org/wp/
-Source0:	https://gitlab.com/Remmina/Remmina/-/archive/%{tarballdir}/Remmina-%{tarballdir}.tar.bz2
-#Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/%{tarballdir}/Remmina-%{tarballver}.tar.gz
+Source0:	https://gitlab.com/Remmina/Remmina/-/archive/v%{version}/Remmina-v%{version}.tar.bz2
+#Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/refs/tags/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	cmake
 BuildRequires:	gettext
@@ -61,21 +61,22 @@ Please don't forget to install the plugins for the protocols you want to use.
 %{_datadir}/gnome-session/sessions/%{name}-gnome.session
 %{_datadir}/xsessions/%{name}-gnome.desktop
 %{_datadir}/applications/org.%{name}.Remmina.desktop
-%{_datadir}/applications/%{name}-file.desktop
+%{_datadir}/applications/org.%{name}.Remmina-file.desktop
 %{_datadir}/applications/%{name}-gnome.desktop
 %{_datadir}/metainfo/org.%{name}.Remmina.appdata.xml
 %{_datadir}/mime/packages/%{name}-mime.xml
 %{_iconsdir}/hicolor/*/apps/*%{name}*.svg
 %{_iconsdir}/hicolor/*/apps/*%{name}*.png
-%{_iconsdir}/hicolor/*/actions/%{name}*.svg
-%{_iconsdir}/hicolor/*/emblems/%{name}-sftp-*.svg
-%{_iconsdir}/hicolor/*/emblems/%{name}-ssh-*.svg
-%{_iconsdir}/hicolor/*/emblems/%{name}-tool-*.svg
-%{_iconsdir}/hicolor/*/actions/view-list.svg
-%{_iconsdir}/hicolor/apps/org.remmina.Remmina-symbolic.svg
+%{_iconsdir}/hicolor/*/actions/org.%{name}.Remmina-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-sftp-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-ssh-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-tool-*.svg
+%{_iconsdir}/hicolor/*/status/org.%{name}.Remmina-status.svg
+#%{_iconsdir}/hicolor/*/actions/view-list.svg
+%{_iconsdir}/hicolor/apps/org.%{name}.Remmina-symbolic.svg
 %{_iconsdir}/hicolor/apps/remmina-symbolic.svg
-%{_iconsdir}/hicolor/scalable/panel/remmina-panel-inverted.svg
-%{_iconsdir}/hicolor/scalable/panel/remmina-panel.svg
+#%{_iconsdir}/hicolor/scalable/panel/remmina-panel-inverted.svg
+#%{_iconsdir}/hicolor/scalable/panel/remmina-panel.svg
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/%{name}-gnome.1.*
 %{_mandir}/man1/gnome-session-%{name}.1.*
@@ -83,12 +84,12 @@ Please don't forget to install the plugins for the protocols you want to use.
 
 #----------------------------------------------------------------------------
 
-%package	devel
+%package devel
 Summary:	Development files for %{name}
 Group:		Development/GNOME and GTK+
 Requires:	%{name} = %{version}-%{release}
 
-%description	devel
+%description devel
 The %{name}-devel package contains header files for developing plugins for
 %{name}.
 
@@ -98,12 +99,12 @@ The %{name}-devel package contains header files for developing plugins for
 
 #----------------------------------------------------------------------------
 
-%package	plugins-common
+%package plugins-common
 Summary:	Common files for Remmina Remote Desktop Client plugins
 Group:		Networking/Remote access
 Requires:	%{name} = %{version}-%{release}
 
-%description	plugins-common
+%description plugins-common
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -117,12 +118,12 @@ desktop client.
 
 #----------------------------------------------------------------------------
 
-%package	plugins-exec
+%package plugins-exec
 Summary:	External execution plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 
-%description    plugins-exec
+%description plugins-exec
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -136,7 +137,7 @@ applications) from the Remmina window.
 #----------------------------------------------------------------------------
 
 %if %{with kwallet_plugin}
-%package	plugins-kwallet
+%package plugins-kwallet
 Summary:	KWallet integration for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 BuildRequires:	lib64KF5Wallet-devel
@@ -145,7 +146,7 @@ Requires:	%{name}-plugins-common = %{version}-%{release}
 Obsoletes:	remmina-plugins-kwallet < 1.2.0-0.rcgit.24.2
 Provides:	remmina-plugins-kwallet = %{version}-%{release}
 
-%description	plugins-kwallet
+%description plugins-kwallet
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -159,7 +160,28 @@ desktop client.
 
 #----------------------------------------------------------------------------
 
-%package	plugins-secret
+%if %{with nx_plugin}
+%package plugins-nx
+Summary:	NX plugin for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+Requires:	%{name}-plugins-common = %{version}-%{release}
+Requires:	nxproxy
+
+%description plugins-nx
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the NX plugin for the Remmina remote desktop client.
+
+%files plugins-nx
+%{_libdir}/%{name}/plugins/%{name}-plugin-nx.so
+#%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-nx-*.svg
+%endif
+
+#----------------------------------------------------------------------------
+
+%package plugins-secret
 Summary:	Keyring integration for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 BuildRequires:	pkgconfig(libsecret-1)
@@ -168,7 +190,7 @@ Requires:	%{name}-plugins-common = %{version}-%{release}
 Obsoletes:	remmina-plugins-gnome < 1.2.0-0.rcgit.24.2
 Provides:	remmina-plugins-gnome = %{version}-%{release}
 
-%description	plugins-secret
+%description plugins-secret
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -181,33 +203,14 @@ desktop client.
 
 #----------------------------------------------------------------------------
 
-%package	plugins-nx
-Summary:	NX plugin for Remmina Remote Desktop Client
-Group:		Networking/Remote access
-Requires:	%{name}-plugins-common = %{version}-%{release}
-Requires:	nxproxy
-
-%description	plugins-nx
-Remmina is a remote desktop client written in GTK+, aiming to be useful for
-system administrators and travelers, who need to work with lots of remote
-computers in front of either large monitors or tiny netbooks.
-
-This package contains the NX plugin for the Remmina remote desktop client.
-
-%files plugins-nx
-%{_libdir}/%{name}/plugins/%{name}-plugin-nx.so
-%{_iconsdir}/hicolor/*/emblems/%{name}-nx-*.svg
-
-#----------------------------------------------------------------------------
-
-%package	plugins-rdp
+%package plugins-rdp
 Summary:	RDP plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 BuildRequires:	pkgconfig(freerdp2) >= 2.0
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	freerdp >= 2.0
 
-%description	plugins-rdp
+%description plugins-rdp
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -217,15 +220,16 @@ remote desktop client.
 
 %files plugins-rdp
 %{_libdir}/%{name}/plugins/%{name}-plugin-rdp.so
-%{_iconsdir}/hicolor/*/emblems/%{name}-rdp-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-rdp-*.svg
 
 #----------------------------------------------------------------------------
 
-%package	plugins-spice
+%package plugins-spice
 Summary:	SPICE plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
-%description	plugins-spice
+
+%description plugins-spice
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -234,16 +238,17 @@ This package contains the SPICE plugin for the Remmina remote desktop client.
 
 %files plugins-spice
 %{_libdir}/%{name}/plugins/%{name}-plugin-spice.so
-%{_iconsdir}/hicolor/*/emblems/%{name}-spice-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-spice-*.svg
 
 #----------------------------------------------------------------------------
 
-%package	plugins-st
+%if %{with st_plugin}
+%package plugins-st
 Summary:	Socket Terminal plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 
-%description	plugins-st
+%description plugins-st
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -253,10 +258,11 @@ desktop client.
 
 %files plugins-st
 %{_libdir}/%{name}/plugins/%{name}-plugin-st.so
+%endif
 
 #----------------------------------------------------------------------------
 
-%package	plugins-vnc
+%package plugins-vnc
 Summary:	VNC plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 BuildRequires:	pkgconfig(gnutls)
@@ -264,29 +270,28 @@ BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libvncserver)
 Requires:	%{name}-plugins-common = %{version}-%{release}
 
-%description	plugins-vnc
+%description plugins-vnc
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
 
-%files plugins-vnc
-%files plugins-vnc
 This package contains the VNC plugin for the Remmina remote desktop
 client.
 
 %files plugins-vnc
 %{_libdir}/%{name}/plugins/%{name}-plugin-vnc.so
-%{_iconsdir}/hicolor/*/emblems/%{name}-vnc-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-vnc-*.svg
 
 #----------------------------------------------------------------------------
 
-%package	plugins-xdmcp
+%if %{with xdmcp_plugin}
+%package plugins-xdmcp
 Summary:	XDMCP plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	x11-server-xephyr
 
-%description	plugins-xdmcp
+%description plugins-xdmcp
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -296,18 +301,19 @@ client.
 
 %files plugins-xdmcp
 %{_libdir}/%{name}/plugins/%{name}-plugin-xdmcp.so
-%{_iconsdir}/hicolor/*/emblems/%{name}-xdmcp-*.svg
+%{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-xdmcp-*.svg
+%endif
 
 #----------------------------------------------------------------------------
 
-%package	plugins-www
+%package plugins-www
 Summary:	www plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	x11-server-xephyr
 Obsoletes:	remmina-plugins-telepathy 
 
-%description	plugins-www
+%description plugins-www
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
 system administrators and travelers, who need to work with lots of remote
 computers in front of either large monitors or tiny netbooks.
@@ -317,37 +323,32 @@ client.
 
 %files plugins-www
 %{_libdir}/remmina/plugins/remmina-plugin-www.so
-%{_iconsdir}/hicolor/scalable/emblems/remmina-www-symbolic.svg
+%{_iconsdir}/hicolor/scalable/emblems/org.%{name}.Remmina-www-symbolic.svg
 
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -n Remmina-%{tarballdir} -p1
+%autosetup  -p1 -n Remmina-v%{version}
 
 %build
 %cmake \
-%if %{with kwallet_plugin}
-	-DWITH_KF5WALLET=ON \
-%else
-	-DWITH_KF5WALLET=OFF \
-%endif
+	-DWITH_KF5WALLET:BOOL=%{?with_kwallet_plugin:ON}%{?!with_kwallet_plugin:OFF} \
+	-DWITH_NX:BOOL=%{?with_nx_plugin:ON}%{?!with_nx_plugin:OFF} \
+	-DWITH_XDMCP:BOOL=%{?with_nxdmcp_plugin:ON}%{?!with_xdmcp_plugin:OFF} \
+	-DWITH_ST:BOOL=%{?with_st_plugin:ON}%{?!with_st_plugin:OFF} \
 	-DWITH_KIOSK_SESSION=ON \
-%if %{with appindicator}
-	-DWITH_APPINDICATOR=ON \
-%else
-	-DWITH_APPINDICATOR=OFF \
-%endif
-	%{nil}
-
-%make_build
+	-DWITH_APPINDICATOR:BOOL=%{?with_appindicator:ON}%{?!with_appindicator:OFF} \
+	-G Ninja
+cd ..
+%ninja_build -C build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 # .desktop
 desktop-file-install \
 	--remove-category="X-GNOME-NetworkSettings" \
-	--dir %{buildroot}%{_datadir}/applications  \
+	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/org.%{name}.Remmina.desktop
 
 # locales
