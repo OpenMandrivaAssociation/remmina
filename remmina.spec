@@ -15,6 +15,7 @@ Source0:	https://gitlab.com/Remmina/Remmina/-/archive/v%{version}/Remmina-v%{ver
 #Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/refs/tags/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	cups-devel
