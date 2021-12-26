@@ -5,7 +5,7 @@
 %bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.21
+Version:	1.4.23
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -167,6 +167,7 @@ Summary:	NX plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	nxproxy
+Suggests:	%{name}-plugins-secret
 
 %description plugins-nx
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -210,6 +211,7 @@ Group:		Networking/Remote access
 BuildRequires:	pkgconfig(freerdp2) >= 2.0
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	freerdp >= 2.0
+Suggests:	%{name}-plugins-secret
 
 %description plugins-rdp
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -229,6 +231,7 @@ remote desktop client.
 Summary:	SPICE plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
+Suggests:	%{name}-plugins-secret
 
 %description plugins-spice
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -248,6 +251,7 @@ This package contains the SPICE plugin for the Remmina remote desktop client.
 Summary:	Socket Terminal plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
+Suggests:	%{name}-plugins-secret
 
 %description plugins-st
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -270,6 +274,7 @@ BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libvncserver)
 Requires:	%{name}-plugins-common = %{version}-%{release}
+Suggests:	%{name}-plugins-secret
 
 %description plugins-vnc
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -291,6 +296,7 @@ Summary:	XDMCP plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	x11-server-xephyr
+Suggests:	%{name}-plugins-secret
 
 %description plugins-xdmcp
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
@@ -313,6 +319,7 @@ Group:		Networking/Remote access
 Requires:	%{name}-plugins-common = %{version}-%{release}
 Requires:	x11-server-xephyr
 Obsoletes:	remmina-plugins-telepathy 
+Suggests:	%{name}-plugins-secret
 
 %description plugins-www
 Remmina is a remote desktop client written in GTK+, aiming to be useful for
