@@ -1,11 +1,18 @@
-%bcond_with appindicator
+%bcond_without appindicator
 %bcond_without kwallet_plugin
+%bcond_without rdp_plugin
+%bcond_without secret_plugin
+%bcond_without spice_plugin
+%bcond_without vnc_plugin
+%bcond_without www_plugin
+%bcond_with x2go_plugin
+# removed from upstream
 %bcond_with nx_plugin
 %bcond_with xdmcp_plugin
 %bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.23
+Version:	1.4.24
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -25,14 +32,15 @@ BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(harfbuzz)
+%if %{with appindicator}
 BuildRequires:	pkgconfig(appindicator3-0.1)
+%endif
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpcre2-8)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libsodium)
-BuildRequires:	pkgconfig(libvncserver)
 BuildRequires:	pkgconfig(spice-client-gtk-3.0)
 BuildRequires:	pkgconfig(TelepathyQt5)
 BuildRequires:	pkgconfig(xkbfile)
@@ -183,6 +191,7 @@ This package contains the NX plugin for the Remmina remote desktop client.
 
 #----------------------------------------------------------------------------
 
+%if %{with secret_plugin}
 %package plugins-secret
 Summary:	Keyring integration for Remmina Remote Desktop Client
 Group:		Networking/Remote access
@@ -202,9 +211,11 @@ desktop client.
 
 %files plugins-secret
 %{_libdir}/%{name}/plugins/%{name}-plugin-secret.so
+%endif
 
 #----------------------------------------------------------------------------
 
+%if %{with rdp_plugin}
 %package plugins-rdp
 Summary:	RDP plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
@@ -224,9 +235,11 @@ remote desktop client.
 %files plugins-rdp
 %{_libdir}/%{name}/plugins/%{name}-plugin-rdp.so
 %{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-rdp-*.svg
+%endif
 
 #----------------------------------------------------------------------------
 
+%if %{with spice_plugin}
 %package plugins-spice
 Summary:	SPICE plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
@@ -243,6 +256,7 @@ This package contains the SPICE plugin for the Remmina remote desktop client.
 %files plugins-spice
 %{_libdir}/%{name}/plugins/%{name}-plugin-spice.so
 %{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-spice-*.svg
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -267,10 +281,12 @@ desktop client.
 
 #----------------------------------------------------------------------------
 
+%if %{with vnc_plugin}
 %package plugins-vnc
 Summary:	VNC plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
 BuildRequires:	pkgconfig(gnutls)
+#BuildRequires:	pkgconfig(gtk-vnc-2.0)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libvncserver)
 Requires:	%{name}-plugins-common = %{version}-%{release}
@@ -287,6 +303,7 @@ client.
 %files plugins-vnc
 %{_libdir}/%{name}/plugins/%{name}-plugin-vnc.so
 %{_iconsdir}/hicolor/*/emblems/org.%{name}.Remmina-vnc-*.svg
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -313,6 +330,7 @@ client.
 
 #----------------------------------------------------------------------------
 
+%if %{with www_plugin}
 %package plugins-www
 Summary:	www plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
@@ -332,6 +350,7 @@ client.
 %files plugins-www
 %{_libdir}/remmina/plugins/remmina-plugin-www.so
 %{_iconsdir}/hicolor/scalable/emblems/org.%{name}.Remmina-www-symbolic.svg
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -361,3 +380,4 @@ desktop-file-install \
 
 # locales
 %find_lang %{name}
+
