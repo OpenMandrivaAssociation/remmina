@@ -1,5 +1,6 @@
 %bcond_without appindicator
 %bcond_without kwallet_plugin
+%bcond_without python_plugin
 %bcond_without rdp_plugin
 %bcond_without secret_plugin
 %bcond_without spice_plugin
@@ -12,7 +13,7 @@
 %bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.25
+Version:	1.4.27
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
@@ -165,6 +166,30 @@ desktop client.
 
 %files plugins-kwallet
 %{_libdir}/%{name}/plugins/%{name}-plugin-kwallet.so
+%endif
+
+#----------------------------------------------------------------------------
+
+%if %{with python_plugin}
+%package plugins-python
+Summary:	Python plugin API implementation for Remmina Remote Desktop Client
+Group:		Networking/Remote access
+BuildRequires:	pkgconfig(python3)
+Requires:	%{name}-plugins-common = %{version}-%{release}
+
+Obsoletes:	remmina-plugins-python < 1.2.0-0.rcgit.24.2
+Provides:	remmina-plugins-python = %{version}-%{release}
+
+%description plugins-python
+Remmina is a remote desktop client written in GTK+, aiming to be useful for
+system administrators and travelers, who need to work with lots of remote
+computers in front of either large monitors or tiny netbooks.
+
+This package contains the plugin with python API for the Remmina remote
+desktop client.
+
+%files plugins-python
+%{_libdir}/%{name}/plugins/%{name}-plugin-python_wrapper.so
 %endif
 
 #----------------------------------------------------------------------------
@@ -361,6 +386,7 @@ client.
 %cmake \
 	-DWITH_KF5WALLET:BOOL=%{?with_kwallet_plugin:ON}%{?!with_kwallet_plugin:OFF} \
 	-DWITH_NX:BOOL=%{?with_nx_plugin:ON}%{?!with_nx_plugin:OFF} \
+	-DWITH_PYTHONLIBS:BOOL=%{?with_python_plugin:ON}%{?!with_python_plugin:OFF} \
 	-DWITH_XDMCP:BOOL=%{?with_nxdmcp_plugin:ON}%{?!with_xdmcp_plugin:OFF} \
 	-DWITH_ST:BOOL=%{?with_st_plugin:ON}%{?!with_st_plugin:OFF} \
 	-DWITH_KIOSK_SESSION=ON \
