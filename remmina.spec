@@ -14,7 +14,7 @@
 
 Name:		remmina
 Version:	1.4.29
-Release:	1
+Release:	2
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
@@ -34,7 +34,7 @@ BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(harfbuzz)
 %if %{with appindicator}
-BuildRequires:	pkgconfig(appindicator3-0.1)
+BuildRequires:	pkgconfig(ayatana-appindicator3-0.1)
 %endif
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(libjpeg)
