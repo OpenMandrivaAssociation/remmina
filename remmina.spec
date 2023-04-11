@@ -13,8 +13,8 @@
 %bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.29
-Release:	2
+Version:	1.4.30
+Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
@@ -74,7 +74,7 @@ Please don't forget to install the plugins for the protocols you want to use.
 %{_datadir}/applications/org.%{name}.Remmina-file.desktop
 %{_datadir}/applications/%{name}-gnome.desktop
 %{_datadir}/metainfo/org.%{name}.Remmina.appdata.xml
-%{_datadir}/mime/packages/%{name}-mime.xml
+%{_datadir}/mime/packages/org.remmina.Remmina-mime.xml
 %{_iconsdir}/hicolor/*/apps/*%{name}*.svg
 %{_iconsdir}/hicolor/*/apps/*%{name}*.png
 %{_iconsdir}/hicolor/*/actions/org.%{name}.Remmina-*.svg
