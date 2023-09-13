@@ -17,7 +17,7 @@
 
 Name:		remmina
 Version:	1.4.31
-Release:	1
+Release:	2
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
