@@ -247,9 +247,8 @@ desktop client.
 %package plugins-rdp
 Summary:	RDP plugin for Remmina Remote Desktop Client
 Group:		Networking/Remote access
-BuildRequires:	pkgconfig(freerdp2) >= 2.0
+BuildRequires:	pkgconfig(freerdp3) >= 3.0
 Requires:	%{name}-plugins-common = %{version}-%{release}
-Requires:	freerdp >= 2.0
 Suggests:	%{name}-plugins-secret
 
 %description plugins-rdp
@@ -394,6 +393,7 @@ client.
 	-DWITH_ST:BOOL=%{?with_st_plugin:ON}%{?!with_st_plugin:OFF} \
 	-DWITH_KIOSK_SESSION=ON \
 	-DWITH_APPINDICATOR:BOOL=%{?with_appindicator:ON}%{?!with_appindicator:OFF} \
+	-DWITH_FREERDP3=ON \
 	-G Ninja
 cd ..
 %ninja_build -C build
