@@ -49,7 +49,7 @@ BuildRequires:	pkgconfig(spice-client-gtk-3.0)
 BuildRequires:	pkgconfig(TelepathyQt5)
 BuildRequires:	pkgconfig(xkbfile)
 BuildRequires:	pkgconfig(vte-2.91)
-BuildRequires:	pkgconfig(webkit2gtk-4.0)
+BuildRequires:	pkgconfig(webkit2gtk-4.1)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	qmake5
 BuildRequires:	xdg-utils
