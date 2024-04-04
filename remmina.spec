@@ -39,6 +39,7 @@ BuildRequires:	pkgconfig(harfbuzz)
 %if %{with appindicator}
 BuildRequires:	pkgconfig(ayatana-appindicator3-0.1)
 %endif
+BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpcre2-8)
