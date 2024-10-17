@@ -21,7 +21,7 @@ Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
 License:	GPLv2+
-URL:		http://www.remmina.org/wp/
+URL:		https://www.remmina.org/wp/
 Source0:	https://gitlab.com/Remmina/Remmina/-/archive/v%{version}/Remmina-v%{version}.tar.bz2
 #Mirror Source0:	https://github.com/FreeRDP/Remmina/archive/refs/tags/v%{version}/%{name}-%{version}.tar.gz
 
