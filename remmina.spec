@@ -1,5 +1,6 @@
 # (mandian) temporary workaround for clang 16
 %global optflags %{optflags} -Wno-incompatible-function-pointer-types
+%global optflags %{optflags} -Wno-incompatible-pointer-types-discards-qualifiers
 
 %bcond_without appindicator
 %bcond_without kwallet_plugin
