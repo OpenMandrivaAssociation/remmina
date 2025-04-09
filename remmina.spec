@@ -16,7 +16,7 @@
 %bcond_with st_plugin
 
 Name:		remmina
-Version:	1.4.36
+Version:	1.4.40
 Release:	1
 Summary:	GTK+ remote desktop client
 Group:		Networking/Remote access
