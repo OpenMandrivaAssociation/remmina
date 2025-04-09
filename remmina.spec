@@ -92,7 +92,7 @@ Please don't forget to install the plugins for the protocols you want to use.
 %{_iconsdir}/hicolor/apps/remmina-symbolic.svg
 %{_iconsdir}/hicolor/scalable/emblems/org.remmina.Remmina-status-green.svg
 %{_iconsdir}/hicolor/scalable/emblems/org.remmina.Remmina-status-grey.svg
-%{_iconsdir}/icons/hicolor/scalable/emblems/org.remmina.Remmina-status-red.svg
+%{_iconsdir}/hicolor/scalable/emblems/org.remmina.Remmina-status-red.svg
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/man1/%{name}-gnome.1.*
 %{_mandir}/man1/gnome-session-%{name}.1.*
